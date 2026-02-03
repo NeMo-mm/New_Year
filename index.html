@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Special Surprise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --bg-color: #fff0f5;
+            --text-color: #d02a52;
+            --card-bg: #ffffff;
+            --accent: #ff69b4;
+            --nav-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ff85a2;
+            --card-bg: #2d2d2d;
+            --accent: #ff1493;
+            --nav-bg: rgba(30, 30, 30, 0.9);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            transition: 0.5s;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav a { text-decoration: none; color: var(--text-color); font-weight: 600; }
+
+        /* Sections */
+        section { padding: 100px 20px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        /* Love Letter Style */
+        .letter-container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
+            border: 2px dashed var(--accent);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; width: 100%; max-width: 1000px; margin-top: 30px;
+        }
+        .gallery-item img { width: 100%; border-radius: 15px; border: 3px solid var(--accent); }
+
+        /* Countdown */
+        .timer-container { display: flex; gap: 15px; margin-top: 20px; }
+        .time-box { background: var(--card-bg); padding: 15px; border-radius: 10px; min-width: 80px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .time-box span { display: block; font-size: 1.8rem; font-weight: bold; }
+
+        /* Interactive Buttons */
+        .btn-group { margin-top: 20px; position: relative; height: 100px; width: 300px; }
+        button { padding: 12px 25px; border-radius: 25px; border: none; cursor: pointer; font-weight: bold; font-family: 'Poppins'; transition: 0.3s; }
+        .yes-btn { background: var(--accent); color: white; font-size: 1.2rem; }
+        .no-btn { background: #888; color: white; position: absolute; }
+
+        /* Falling Hearts */
+        .dropping-heart {
+            position: fixed; top: -10%; color: var(--accent);
+            pointer-events: none; z-index: 999;
+            animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+
+        .mode-btn { background: var(--accent); color: white; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div style="color: var(--accent); font-size: 1.5rem;"><i class="fas fa-heart"></i></div>
+        <a href="#home">Home</a>
+        <a href="#countdown">Countdown</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#letter">Secret Message</a>
+        <button class="mode-btn" onclick="toggleMode()">🌓 Night Mode</button>
+    </nav>
+
+    <section id="home">
+        <h1>Happy Valentine's Day! 🌸</h1>
+        <h1>Meng &#128149; Vattana</h1>
+        <p>You make every day feel like February 14th.</p>
+        <div style="font-size: 40px;">🌹🌷🌻</div>
+    </section>
+
+    <section id="home">
+        <h1>Will you be my Valentine? 🌹</h1>
+        <div class="btn-group">
+            <button class="yes-btn" onclick="sayYes()">Yes! ❤️</button>
+            <button class="no-btn" id="noBtn" onmouseover="moveNo()">No</button>
+        </div>
+        <h2 id="responseMsg" style="margin-top: 20px;"></h2>
+    </section>
+
+    <section id="countdown">
+        <h2>Counting Down to Feb 14 🌷</h2>
+        <div class="timer-container">
+            <div class="time-box"><span id="days">00</span>Days</div>
+            <div class="time-box"><span id="hours">00</span>Hrs</div>
+            <div class="time-box"><span id="mins">00</span>Min</div>
+            <div class="time-box"><span id="secs">00</span>Sec</div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Our Gallery 🌸</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="p1.jpg" alt="1"></div>
+            <div class="gallery-item"><img src="p2.jpg" alt="2"></div>
+            <div class="gallery-item"><img src="p3.jpg" alt="3"></div>
+        </div>
+    </section>
+
+    
+
+    <section id="letter">
+        <div class="letter-container" onclick="openLetter()">
+            <i class="fas fa-envelope-open-heart" style="font-size: 3rem; color: var(--accent);"></i>
+            <h3 style="margin-top: 15px;">Click to open your message</h3>
+            <p id="secretText" style="display: none; margin-top: 15px; line-height: 1.6;">
+                "To my special Girl🌸, <br> 
+                You are the reason I smile every single day. <br>
+                Happy Valentine's Day! Forever yours. ❤️"
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // 1. Night Mode
+        function toggleMode() {
+            document.body.dataset.theme = document.body.dataset.theme === 'dark' ? '' : 'dark';
+        }
+
+        // 2. Button "No" Run Away
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.clientWidth);
+            const y = Math.random() * (window.innerHeight - btn.clientHeight);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function sayYes() {
+            document.getElementById('responseMsg').innerText = "I knew you would say YES! Happy Valentine's Day! 🥂🎉";
+            for(let i=0; i<50; i++) { setTimeout(createDroppingHeart, i * 50); }
+        }
+
+        // 3. Heart Dropdown Effect
+        function createDroppingHeart() {
+            const heart = document.createElement('i');
+            heart.classList.add('fas', 'fa-heart', 'dropping-heart');
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+            const duration = Math.random() * 3 + 2;
+            heart.style.animationDuration = duration + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, duration * 1000);
+        }
+        setInterval(createDroppingHeart, 300);
+
+        // 4. Open Secret Letter
+        function openLetter() {
+            const text = document.getElementById('secretText');
+            text.style.display = text.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // 5. Countdown Logic
+        function updateTimer() {
+            const target = new Date("Feb 14, 2026 00:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = target - now;
+            if (diff > 0) {
+                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            }
+        }
+        setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
