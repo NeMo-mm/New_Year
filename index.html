@@ -1,213 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="km">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Special Surprise</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khmer New Year - Realistic Fireworks</title>
+<link rel="stylesheet" href="index.css">
+<style>
 
-        :root {
-            --bg-color: #fff0f5;
-            --text-color: #d02a52;
-            --card-bg: #ffffff;
-            --accent: #ff69b4;
-            --nav-bg: rgba(255, 255, 255, 0.8);
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #1a1a1a;
-            --text-color: #ff85a2;
-            --card-bg: #2d2d2d;
-            --accent: #ff1493;
-            --nav-bg: rgba(30, 30, 30, 0.9);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Poppins', sans-serif;
-            transition: 0.5s;
-            overflow-x: hidden;
-            text-align: center;
-        }
-
-        /* Navigation Bar */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            background: var(--nav-bg);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 15px 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        nav a { text-decoration: none; color: var(--text-color); font-weight: 600; }
-
-        /* Sections */
-        section { padding: 100px 20px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-
-        /* Love Letter Style */
-        .letter-container {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 500px;
-            border: 2px dashed var(--accent);
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        /* Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px; width: 100%; max-width: 1000px; margin-top: 30px;
-        }
-        .gallery-item img { width: 100%; border-radius: 15px; border: 3px solid var(--accent); }
-
-        /* Countdown */
-        .timer-container { display: flex; gap: 15px; margin-top: 20px; }
-        .time-box { background: var(--card-bg); padding: 15px; border-radius: 10px; min-width: 80px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .time-box span { display: block; font-size: 1.8rem; font-weight: bold; }
-
-        /* Interactive Buttons */
-        .btn-group { margin-top: 20px; position: relative; height: 100px; width: 300px; }
-        button { padding: 12px 25px; border-radius: 25px; border: none; cursor: pointer; font-weight: bold; font-family: 'Poppins'; transition: 0.3s; }
-        .yes-btn { background: var(--accent); color: white; font-size: 1.2rem; }
-        .no-btn { background: #888; color: white; position: absolute; }
-
-        /* Falling Hearts */
-        .dropping-heart {
-            position: fixed; top: -10%; color: var(--accent);
-            pointer-events: none; z-index: 999;
-            animation: fall linear forwards;
-        }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
-
-        .mode-btn { background: var(--accent); color: white; }
-    </style>
+</style>
 </head>
+
 <body>
-
-    <nav>
-        <div style="color: var(--accent); font-size: 1.5rem;"><i class="fas fa-heart"></i></div>
-        <a href="#home">Home</a>
-        <a href="#countdown">Countdown</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#letter">Secret Message</a>
-        <button class="mode-btn" onclick="toggleMode()">🌓 Night Mode</button>
-    </nav>
-
-    <section id="home">
-        <h1>Happy Valentine's Day! 🌸</h1>
-        <h1>Meng &#128149; Vattana</h1>
-        <p>You make every day feel like February 14th.</p>
-        <div style="font-size: 40px;">🌹🌷🌻</div>
-    </section>
-
-    <section id="home">
-        <h1>Will you be my Valentine? 🌹</h1>
-        <div class="btn-group">
-            <button class="yes-btn" onclick="sayYes()">Yes! ❤️</button>
-            <button class="no-btn" id="noBtn" onmouseover="moveNo()">No</button>
-        </div>
-        <h2 id="responseMsg" style="margin-top: 20px;"></h2>
-    </section>
-
-    <section id="countdown">
-        <h2>Counting Down to Feb 14 🌷</h2>
-        <div class="timer-container">
-            <div class="time-box"><span id="days">00</span>Days</div>
-            <div class="time-box"><span id="hours">00</span>Hrs</div>
-            <div class="time-box"><span id="mins">00</span>Min</div>
-            <div class="time-box"><span id="secs">00</span>Sec</div>
-        </div>
-    </section>
-
-    <section id="gallery">
-        <h2>Our Gallery 🌸</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="p1.jpg" alt="1"></div>
-            <div class="gallery-item"><img src="p2.jpg" alt="2"></div>
-            <div class="gallery-item"><img src="p3.jpg" alt="3"></div>
-        </div>
-    </section>
-
+<nav class="navbar">
+  <div class="logo">រីករាយពិធីបុណ្យចូលឆ្នាំថ្មី ប្រពៃណីជាតិខ្មែរ❤🎉</div>
+  <ul class="menu" id="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
     
+  <div class="hambuger" onclick="togglemenu()">☰</div> 
+</nav>
+<div class="khnew">
+  <h1>រីករាយពិធីបុណ្យចូលឆ្នាំថ្មី ប្រពៃណីជាតិខ្មែរ ឆ្នាំមមី អដ្ឋស័ក ពុទ្ធសករាជ ២៥៧០ (គ.ស. ២០២៦)!</h1>
+  <h4>នេះគឺជាអត្ថបទសម្រាប់អបអរសាទរក្នុងឱកាសដ៏វិសេសវិសាលនេះ៖</h4>
+</div>
+<div class="cards">
+  <div class="card">
+    <h3>🌸 អបអរសាទរពិធីបុណ្យចូលឆ្នាំថ្មីប្រពៃណីជាតិខ្មែរ 🌸</h3>
+    <h4>មហាសង្រ្កាន្តឆ្នាំ ២០២៦</h4>
+    <p>មហា​សង្រ្កាន្ត​ឆ្នាំ​ថ្មី​បាន​ឈាន​ចូល​មក​ដល់​ហើយ! នេះគឺជាពេលវេលាដ៏មានសិរីសួស្ដីបំផុតសម្រាប់បងប្អូនខ្មែរគ្រប់រូប ក្នុងការជួបជុំគ្រួសារ បងប្អូន និងមិត្តភក្តិ ដើម្បីត្រេកអរទទួលទេវតាឆ្នាំថ្មី។ 🇰🇭✨
+      ឆ្នាំនេះ គឺជាឆ្នាំមមី (សត្វសេះ) ដែលនាំមកនូវថាមពល ការតស៊ូ និងជោគជ័យ។
+    </p>
+  </div>
 
-    <section id="letter">
-        <div class="letter-container" onclick="openLetter()">
-            <i class="fas fa-envelope-open-heart" style="font-size: 3rem; color: var(--accent);"></i>
-            <h3 style="margin-top: 15px;">Click to open your message</h3>
-            <p id="secretText" style="display: none; margin-top: 15px; line-height: 1.6;">
-                "To my special Girl🌸, <br> 
-                You are the reason I smile every single day. <br>
-                Happy Valentine's Day! Forever yours. ❤️"
-            </p>
-        </div>
-    </section>
+  <div class="card">
+    <h3>យើងរួមគ្នាថែរក្សាទំនៀមទម្លាប់ដ៏ល្អផូរផង់តាមរយៈ៖</h3>
+    <p>ថ្ងៃទី១ (ថ្ងៃសង្រ្កាន្ត)៖ រៀបចំរណ្តាប់ពលិការទទួលទេវតាឆ្នាំថ្មី ដើម្បីសុំសេចក្តីសុខសប្បាយ។ 🕯️🙏</p>
+    <p>ថ្ងៃទី២ (ថ្ងៃវារៈវ័នបត)៖ ជូនកាដូដល់អ្នកមានគុណ លោកតា លោកយាយ និងធ្វើបុណ្យដាក់ទាន។ 🎁❤️</p>
+    <p>ថ្ងៃទី៣ (ថ្ងៃវារៈឡើងស័ក)៖ ស្រង់ព្រះ សម្អាតចិត្តឲ្យបរិសុទ្ធ និងលេងល្បែងប្រជាប្រិយខ្មែរយ៉ាងសប្បាយរីករាយ។ 💦</p>
+  </div>
 
-    <script>
-        // 1. Night Mode
-        function toggleMode() {
-            document.body.dataset.theme = document.body.dataset.theme === 'dark' ? '' : 'dark';
-        }
+  <div class="card">
+    <h3>ពរជ័យឆ្នាំថ្មី៖</h3>
+    <h4>សូមឱ្យឆ្នាំថ្មីនេះ នាំមកនូវ៖</h4>
+    <p>សុខភាពមាំមួន និងបញ្ញាឈ្លាសវៃ 🧠💪</p>
+    <p>ការងារ និងការសិក្សាទទួលបានជោគជ័យត្រចះត្រចង់ 🎓🚀</p>
+    <p>សេចក្តីសុខ សុភមង្គលក្នុងគ្រួសារ និងមានសំណាងល្អគ្រប់ទិសទី។ 🍀💰</p>
+    <p>* កុំភ្លេចចូលរួមលេងល្បែងប្រជាប្រិយដូចជា បោះអង្គញ់ ទាញព្រ័ត្រ និងរាំលេងកម្សាន្តដោយក្ដីថ្លៃថ្នូរ និងសុវត្ថិភាពទាំងអស់គ្នាណា! 💃🕺</p>
+    <h4>សួស្ដីឆ្នាំថ្មី! Happy Khmer New Year 2026! 🇰🇭🎉</h4>
+  </div>
+</div>
 
-        // 2. Button "No" Run Away
-        function moveNo() {
-            const btn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - btn.clientWidth);
-            const y = Math.random() * (window.innerHeight - btn.clientHeight);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
-        }
+<!--
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <h2>🎉 សូមបញ្ចូលឈ្មោះរបស់អ្នក 🎉</h2>
+    <input type="text" id="nameInput" placeholder="Your name">
+    <button onclick="startApp()">Start</button>
+  </div>
+</div>
+-->
+<div class="main" id="main">
+  <h1 id="message"></h1>
+</div>
 
-        function sayYes() {
-            document.getElementById('responseMsg').innerText = "I knew you would say YES! Happy Valentine's Day! 🥂🎉";
-            for(let i=0; i<50; i++) { setTimeout(createDroppingHeart, i * 50); }
-        }
+<canvas id="fireworks"></canvas>
+<div class="flower"></div>
 
-        // 3. Heart Dropdown Effect
-        function createDroppingHeart() {
-            const heart = document.createElement('i');
-            heart.classList.add('fas', 'fa-heart', 'dropping-heart');
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-            const duration = Math.random() * 3 + 2;
-            heart.style.animationDuration = duration + "s";
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, duration * 1000);
-        }
-        setInterval(createDroppingHeart, 300);
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-        // 4. Open Secret Letter
-        function openLetter() {
-            const text = document.getElementById('secretText');
-            text.style.display = text.style.display === 'none' ? 'block' : 'none';
-        }
+<!-- Popup 
+<div id="welcomePopup" class="popup">
+  <div class="popup-box">
+    <h2>Welcome 👋</h2>
+    <p>Welcome to my website!</p>
+  </div>
+</div>
+-->
 
-        // 5. Countdown Logic
-        function updateTimer() {
-            const target = new Date("Feb 14, 2026 00:00:00").getTime();
-            const now = new Date().getTime();
-            const diff = target - now;
-            if (diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            }
-        }
-        setInterval(updateTimer, 1000);
-    </script>
+<!-- Main Content
+<div class="content">
+  <h1>My Website</h1>
+  <p>This is the main page.</p>
+</div>
+ --> 
+
+<section class="section">
+  <h2>🏠 Home</h2>
+  <p>Welcome to Khmer New Year Website</p>
+</section>
+
+<section class="section">
+  <h2>ℹ️ About</h2>
+  <p>This website celebrates Khmer New Year 🎉</p>
+</section>
+
+<section class="section">
+  <h2>📞 Contact</h2>
+  <p>Telegram: Username: Ronaldo | Facebook: Ronaldo | Phone: 077777777</p>
+</section>
+
+
+<script>
+function togglemenu() {
+  document.getElementById("menu").classList.toggle("active");
+}
+
+
+
+
+
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+let particles = [];
+let fireworkInterval;
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Physics-based Particle Class
+class Particle {
+  constructor(x, y, color) {
+    this.x = x;
+    this.y = y;
+    this.color = color;
+    this.angle = Math.random() * Math.PI * 2;
+    this.speed = Math.random() * 8 + 4; // High initial burst
+    this.friction = 0.96;               // Air resistance
+    this.gravity = 0.15;                // Falling down
+    this.alpha = 1;                     // Opacity
+    this.decay = Math.random() * 0.01 + 0.015; 
+  }
+
+  update() {
+    this.speed *= this.friction; 
+    this.x += Math.cos(this.angle) * this.speed;
+    this.y += Math.sin(this.angle) * this.speed + this.gravity;
+    this.alpha -= this.decay;
+  }
+
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, 1.8, 0, Math.PI * 2); 
+    ctx.fillStyle = this.color;
+    ctx.shadowBlur = 8;                 // Realistic glow
+    ctx.shadowColor = this.color;
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+function createFirework() {
+  const x = Math.random() * canvas.width;
+  const y = Math.random() * (canvas.height / 2.5);
+  const color = `hsl(${Math.random() * 100000}, 100%, 60%)`;
+
+  for (let i = 0; i < 80; i++) {
+    particles.push(new Particle(x, y, color));
+  }
+}
+
+function animate() {
+  // Use clearRect to keep the canvas transparent so the main background shows
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach((p, index) => {
+    if (p.alpha <= 0) {
+      particles.splice(index, 1);
+    } else {
+      p.update();
+      p.draw();
+    }
+  });
+  requestAnimationFrame(animate);
+}
+
+function createFlowers() {
+  const container = document.querySelector(".flower");
+  const emojis = ["🌸",  "✨",  "🎉"];
+  for (let i = 0; i < 10; i++) {
+    let flower = document.createElement("span");
+    flower.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.animationDuration = (3 + Math.random() * 5) + "s";
+    container.appendChild(flower);
+  }
+}
+
+function startApp() {
+  const name = document.getElementById("nameInput").value;
+  if (!name) return alert("សូមបញ្ចូលឈ្មោះ!");
+
+  // Hide popup & show main content
+  document.getElementById("popup").style.display = "none";
+  document.getElementById("main").style.display = "flex";
+  document.getElementById("message").innerText = "🎊 សួស្តីឆ្នាំថ្មី, " + name + "! 🎊";
+  
+  // Audio
+  document.getElementById("music").play().catch(() => {});
+
+  // Start Animations
+  animate(); 
+  createFlowers();
+
+  // Create fireworks for exactly 3 seconds
+  fireworkInterval = setInterval(createFirework, 450); 
+  
+  let interval = setInterval(createFirework,500);
+  setTimeout(() => {
+    clearInterval(interval);
+  },3000)
+  
+}
+
+// Handle window resizing
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+
+window.onload = function() {
+  let popup = document.getElementById("welcomePopup");
+
+  // Hide popup after 3 seconds
+  setTimeout(() => {
+    popup.classList.add("hide");
+  }, 3000);
+};
+</script>
 </body>
 </html>
