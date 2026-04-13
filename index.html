@@ -108,11 +108,6 @@
 function togglemenu() {
   document.getElementById("menu").classList.toggle("active");
 }
-
-
-
-
-
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 let particles = [];
@@ -193,9 +188,32 @@ function createFlowers() {
 }
 
 function startApp() {
-  const name = document.getElementById("nameInput").value;
-  if (!name) return alert("សូមបញ្ចូលឈ្មោះ!");
+  let name = document.getElementById("nameinput").value;
+  if (name === "") {
+    alert("សូមបញ្ចូលឈ្មោះរបស់អ្នក!");
+    return;
+  }
+  // save the name users
+  localStorage.setItem("username", name);
+  showMain(name);
+}
 
+function showMain(name) {
+  document.getElementById("popup").style.display = "none";
+  document.getElementById("main").style.display = "flex";
+  let message = document.getElementById("message");
+  message.innerText = "🎉 Happy Khmer New Year." + name + "!❤";
+  document.getElementById("music").play();
+  createFlowers();
+  createFirework();
+}
+
+window.onload = function() {
+  let saveName = localStorage.getItem("username");
+  if (saveName) {
+    showMain(saveName);
+  }
+}
   // Hide popup & show main content
   document.getElementById("popup").style.display = "none";
   document.getElementById("main").style.display = "flex";
@@ -216,7 +234,7 @@ function startApp() {
     clearInterval(interval);
   },3000)
   
-}
+
 
 // Handle window resizing
 window.addEventListener('resize', () => {
